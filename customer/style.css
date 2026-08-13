@@ -1,0 +1,293 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --black: #0b0b0b;
+    --dark: #141414;
+    --white: #ffffff;
+    --muted: #8f8f8f;
+    --border: #242424;
+    --soft: #f5f5f5;
+    --accent: #d9ff00;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--soft);
+    color: var(--black);
+    min-height: 100vh;
+    padding-bottom: 90px;
+}
+
+.topbar {
+    background: var(--black);
+    color: var(--white);
+    padding: 24px 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.brand span {
+    color: var(--accent);
+}
+
+.tagline {
+    margin-top: 6px;
+    color: #aaa;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.profile-btn {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    background: #1b1b1b;
+    color: white;
+    font-size: 18px;
+}
+
+main {
+    padding: 18px;
+}
+
+.location-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.location-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.pickup-dot {
+    background: var(--accent);
+    border: 3px solid #111;
+}
+
+.destination-dot {
+    background: #111;
+}
+
+.location-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.location-content small {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.location-content strong {
+    font-size: 14px;
+}
+
+.location-content input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: 600;
+    background: transparent;
+}
+
+.location-content input::placeholder {
+    color: #999;
+}
+
+.line {
+    height: 28px;
+    border-left: 1px dashed #bbb;
+    margin-left: 5px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.ride-section {
+    margin-top: 25px;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 12px;
+}
+
+.section-title h2 {
+    font-size: 18px;
+}
+
+.section-title span {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.ride-card {
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 10px;
+}
+
+.ride-card.selected {
+    border-color: #111;
+}
+
+.ride-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 13px;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+}
+
+.ride-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.ride-info strong {
+    font-size: 14px;
+}
+
+.ride-info span,
+.ride-price span {
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 4px;
+}
+
+.ride-price {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.ride-price strong {
+    font-size: 14px;
+}
+
+.find-ride {
+    width: 100%;
+    margin-top: 12px;
+    padding: 18px;
+    border: none;
+    border-radius: 15px;
+    background: var(--black);
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.find-ride:active {
+    transform: scale(0.98);
+}
+
+.quick-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.quick-item {
+    background: white;
+    border-radius: 14px;
+    padding: 13px 5px;
+    text-align: center;
+}
+
+.quick-item div {
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+.quick-item span {
+    font-size: 9px;
+    color: #555;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    background: white;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: #999;
+}
+
+.nav-item span {
+    font-size: 19px;
+}
+
+.nav-item small {
+    font-size: 9px;
+}
+
+.nav-item.active {
+    color: #111;
+    font-weight: 700;
+}
+
+@media (min-width: 600px) {
+    body {
+        max-width: 480px;
+        margin: auto;
+        box-shadow: 0 0 40px rgba(0,0,0,0.08);
+    }
+
+    .bottom-nav {
+        max-width: 480px;
+        margin: auto;
+    }
+}
