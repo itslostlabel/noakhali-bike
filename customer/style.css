@@ -6,56 +6,48 @@
 
 :root {
     --black: #090909;
-    --dark: #111111;
     --white: #ffffff;
-    --muted: #8d8d8d;
-    --border: #e7e7e7;
+    --muted: #888888;
     --background: #f4f4f2;
     --accent: #dfff00;
-    --green: #22a06b;
 }
 
-html {
-    scroll-behavior: smooth;
+html,
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: var(--background);
     color: var(--black);
-    min-height: 100vh;
-    padding-bottom: 88px;
+    padding-bottom: 82px;
 }
 
 
-/* =========================
-   MAP
-========================= */
+/* MAP */
 
 #map {
     width: 100%;
-    height: 270px;
-    background: #dedede;
-    z-index: 1;
+    height: 280px;
+    background: #dddddd;
 }
 
 
-/* =========================
-   TOP BAR
-========================= */
+/* TOP BAR */
 
 .topbar {
-    position: relative;
-    z-index: 5;
+    width: 100%;
 
     background: var(--black);
-    color: var(--white);
+    color: white;
 
     padding: 22px 20px 25px;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
 .brand {
@@ -70,12 +62,8 @@ body {
 
 .tagline {
     margin-top: 6px;
-
     color: #999;
-
     font-size: 10px;
-    font-weight: 600;
-
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
@@ -91,31 +79,23 @@ body {
     color: white;
 
     font-size: 18px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 main {
-    position: relative;
-    z-index: 3;
-
+    width: 100%;
     padding: 18px;
 }
 
 
-/* =========================
-   LOCATION CARD
-========================= */
+/* LOCATION */
 
 .location-card {
-    background: var(--white);
+    width: 100%;
+
+    background: white;
 
     border-radius: 19px;
 
@@ -128,44 +108,36 @@ main {
 .location-row {
     display: flex;
     align-items: center;
-
     gap: 14px;
 }
 
 .dot {
     width: 12px;
     height: 12px;
-
     border-radius: 50%;
-
     flex-shrink: 0;
 }
 
 .pickup-dot {
     background: var(--accent);
-
-    border: 3px solid var(--black);
+    border: 3px solid #090909;
 }
 
 .destination-dot {
-    background: var(--black);
+    background: #090909;
 }
 
 .location-content {
     width: 100%;
-
     display: flex;
     flex-direction: column;
 }
 
 .location-content small {
     color: var(--muted);
-
     font-size: 9px;
     font-weight: 800;
-
     letter-spacing: 1.1px;
-
     margin-bottom: 6px;
 }
 
@@ -182,21 +154,18 @@ main {
 
     background: transparent;
 
-    color: var(--black);
-
     font-size: 15px;
     font-weight: 700;
 }
 
 .location-content input::placeholder {
     color: #999;
-    font-weight: 600;
 }
 
 .line {
     height: 28px;
 
-    border-left: 1px dashed #bdbdbd;
+    border-left: 1px dashed #bbb;
 
     margin-left: 5px;
     margin-top: 4px;
@@ -204,9 +173,7 @@ main {
 }
 
 
-/* =========================
-   RIDE SECTION
-========================= */
+/* RIDES */
 
 .ride-section {
     margin-top: 26px;
@@ -214,7 +181,6 @@ main {
 
 .section-title {
     display: flex;
-
     justify-content: space-between;
     align-items: flex-end;
 
@@ -228,43 +194,28 @@ main {
 
 .section-title span {
     color: var(--muted);
-
     font-size: 10px;
-    font-weight: 600;
 }
 
-
-/* =========================
-   RIDE CARD
-========================= */
-
 .ride-card {
-    background: var(--white);
+    width: 100%;
+
+    background: white;
 
     border: 2px solid transparent;
-
     border-radius: 17px;
 
     padding: 15px;
 
     display: flex;
     align-items: center;
-
     gap: 13px;
 
     margin-bottom: 10px;
-
-    transition:
-        transform 0.15s ease,
-        border-color 0.15s ease;
 }
 
 .ride-card.selected {
-    border-color: var(--black);
-}
-
-.ride-card:active {
-    transform: scale(0.985);
+    border-color: #090909;
 }
 
 .ride-icon {
@@ -273,7 +224,7 @@ main {
 
     border-radius: 14px;
 
-    background: var(--black);
+    background: #090909;
 
     display: flex;
     align-items: center;
@@ -291,14 +242,11 @@ main {
 
 .ride-info strong {
     font-size: 14px;
-    font-weight: 800;
 }
 
 .ride-info span {
     color: var(--muted);
-
     font-size: 10px;
-
     margin-top: 4px;
 }
 
@@ -315,16 +263,12 @@ main {
 
 .ride-price span {
     color: var(--muted);
-
     font-size: 9px;
-
     margin-top: 4px;
 }
 
 
-/* =========================
-   FIND RIDE BUTTON
-========================= */
+/* FIND RIDE */
 
 .find-ride {
     width: 100%;
@@ -336,35 +280,21 @@ main {
     border: none;
     border-radius: 15px;
 
-    background: var(--black);
-    color: var(--white);
+    background: #090909;
+    color: white;
 
     font-size: 13px;
     font-weight: 900;
 
     letter-spacing: 1.7px;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease;
-}
-
-.find-ride:active {
-    transform: scale(0.98);
-}
-
-.find-ride:hover {
-    background: #202020;
 }
 
 
-/* =========================
-   QUICK ACTIONS
-========================= */
+/* QUICK */
 
 .quick-section {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns:
@@ -376,7 +306,7 @@ main {
 }
 
 .quick-item {
-    background: var(--white);
+    background: white;
 
     border-radius: 14px;
 
@@ -387,45 +317,40 @@ main {
 
 .quick-item div {
     font-size: 18px;
-
     margin-bottom: 7px;
 }
 
 .quick-item span {
     color: #555;
-
     font-size: 9px;
 }
 
 
-/* =========================
-   BOTTOM NAVIGATION
-========================= */
+/* BOTTOM NAV */
 
 .bottom-nav {
     position: fixed;
 
-    bottom: 0;
     left: 0;
     right: 0;
+    bottom: 0;
 
+    width: 100%;
     height: 72px;
 
-    background: var(--white);
+    background: white;
 
-    border-top: 1px solid #dedede;
+    border-top: 1px solid #ddd;
 
     display: flex;
 
     justify-content: space-around;
     align-items: center;
 
-    z-index: 100;
+    z-index: 9999;
 }
 
 .nav-item {
-    min-width: 55px;
-
     display: flex;
     flex-direction: column;
 
@@ -445,30 +370,24 @@ main {
 }
 
 .nav-item.active {
-    color: var(--black);
-
+    color: #090909;
     font-weight: 800;
 }
 
 
-/* =========================
-   DESKTOP / TABLET
-========================= */
+/* LARGE SCREEN */
 
-@media (min-width: 600px) {
+@media (min-width: 700px) {
 
     body {
-        max-width: 480px;
-
-        margin: auto;
-
-        box-shadow:
-            0 0 45px rgba(0, 0, 0, 0.08);
+        max-width: 600px;
+        margin: 0 auto;
     }
 
     .bottom-nav {
-        max-width: 480px;
-
-        margin: auto;
+        max-width: 600px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
     }
 }

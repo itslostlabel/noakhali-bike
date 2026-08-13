@@ -12,22 +12,17 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Leaflet Map CSS -->
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIINfQ3M7N0mV2L6K1vY9p9Y6V9g7G3g8="
         crossorigin=""
     >
 </head>
 
 <body>
 
-    <!-- MAP -->
     <div id="map"></div>
 
-
-    <!-- TOP BAR -->
     <header class="topbar">
 
         <div>
@@ -49,19 +44,15 @@
 
     <main>
 
-        <!-- LOCATION CARD -->
         <section class="location-card">
 
-            <!-- PICKUP -->
             <div class="location-row">
 
                 <div class="dot pickup-dot"></div>
 
                 <div class="location-content">
 
-                    <small>
-                        PICKUP LOCATION
-                    </small>
+                    <small>PICKUP LOCATION</small>
 
                     <strong id="pickupLocation">
                         Detecting your location...
@@ -75,16 +66,13 @@
             <div class="line"></div>
 
 
-            <!-- DESTINATION -->
             <div class="location-row">
 
                 <div class="dot destination-dot"></div>
 
                 <div class="location-content">
 
-                    <small>
-                        WHERE TO?
-                    </small>
+                    <small>WHERE TO?</small>
 
                     <input
                         type="text"
@@ -100,14 +88,11 @@
         </section>
 
 
-        <!-- RIDE SECTION -->
         <section class="ride-section">
 
             <div class="section-title">
 
-                <h2>
-                    Choose your ride
-                </h2>
+                <h2>Choose your ride</h2>
 
                 <span>
                     Available nearby
@@ -116,7 +101,6 @@
             </div>
 
 
-            <!-- STANDARD BIKE -->
             <div class="ride-card selected">
 
                 <div class="ride-icon">
@@ -150,7 +134,6 @@
             </div>
 
 
-            <!-- PREMIUM BIKE -->
             <div class="ride-card">
 
                 <div class="ride-icon">
@@ -186,7 +169,6 @@
         </section>
 
 
-        <!-- FIND RIDE -->
         <button
             class="find-ride"
             id="findRide"
@@ -195,58 +177,26 @@
         </button>
 
 
-        <!-- QUICK ACTIONS -->
         <section class="quick-section">
 
             <div class="quick-item">
-
-                <div>
-                    📍
-                </div>
-
-                <span>
-                    Saved places
-                </span>
-
+                <div>📍</div>
+                <span>Saved places</span>
             </div>
 
-
             <div class="quick-item">
-
-                <div>
-                    🕘
-                </div>
-
-                <span>
-                    Ride history
-                </span>
-
+                <div>🕘</div>
+                <span>Ride history</span>
             </div>
 
-
             <div class="quick-item">
-
-                <div>
-                    🛡️
-                </div>
-
-                <span>
-                    Safety
-                </span>
-
+                <div>🛡️</div>
+                <span>Safety</span>
             </div>
 
-
             <div class="quick-item">
-
-                <div>
-                    💬
-                </div>
-
-                <span>
-                    Help
-                </span>
-
+                <div>💬</div>
+                <span>Help</span>
             </div>
 
         </section>
@@ -254,72 +204,36 @@
     </main>
 
 
-    <!-- BOTTOM NAVIGATION -->
     <nav class="bottom-nav">
 
         <div class="nav-item active">
-
-            <span>
-                ⌂
-            </span>
-
-            <small>
-                Home
-            </small>
-
+            <span>⌂</span>
+            <small>Home</small>
         </div>
 
-
         <div class="nav-item">
-
-            <span>
-                🕘
-            </span>
-
-            <small>
-                Rides
-            </small>
-
+            <span>🕘</span>
+            <small>Rides</small>
         </div>
 
-
         <div class="nav-item">
-
-            <span>
-                💳
-            </span>
-
-            <small>
-                Payments
-            </small>
-
+            <span>💳</span>
+            <small>Payments</small>
         </div>
 
-
         <div class="nav-item">
-
-            <span>
-                👤
-            </span>
-
-            <small>
-                Profile
-            </small>
-
+            <span>👤</span>
+            <small>Profile</small>
         </div>
 
     </nav>
 
 
-    <!-- Leaflet Map JavaScript -->
     <script
         src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""
     ></script>
 
-
-    <!-- Our App JavaScript -->
     <script src="app.js"></script>
 
 </body>
