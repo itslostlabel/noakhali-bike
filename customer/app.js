@@ -1,5 +1,7 @@
 // ==========================================
 // NOAKHALI BIKE - CUSTOMER APP
+// STEP 14
+// Destination Search + Fare Estimate
 // ==========================================
 
 
@@ -22,12 +24,14 @@ const findRide =
 // ==========================================
 
 let map = null;
-
 let userMarker = null;
+let destinationMarker = null;
 
 let userLatitude = null;
-
 let userLongitude = null;
+
+let destinationLatitude = null;
+let destinationLongitude = null;
 
 
 // ==========================================
@@ -45,23 +49,15 @@ function initializeMap() {
         return;
     }
 
-
-    // Initial map position
-    // Maijdi / Noakhali area
-
     map = L.map("map").setView(
         [22.8696, 91.0995],
         13
     );
 
-
-    // OpenStreetMap tiles
-
     L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
             maxZoom: 19,
-
             attribution:
                 "&copy; OpenStreetMap contributors"
         }
@@ -70,7 +66,7 @@ function initializeMap() {
 
 
 // ==========================================
-// UPDATE USER LOCATION ON MAP
+// UPDATE USER LOCATION
 // ==========================================
 
 function updateMapLocation(
@@ -78,69 +74,38 @@ function updateMapLocation(
     longitude
 ) {
 
-    if (!map) {
-        return;
-    }
-
-
-    // Save coordinates
+    if (!map) return;
 
     userLatitude = latitude;
-
     userLongitude = longitude;
-
-
-    // Move map
 
     map.setView(
         [latitude, longitude],
         16
     );
 
-
-    // Remove previous marker
-
     if (userMarker) {
-
-        map.removeLayer(
-            userMarker
-        );
+        map.removeLayer(userMarker);
     }
-
-
-    // Create new marker
 
     userMarker = L.marker([
         latitude,
         longitude
     ]).addTo(map);
 
-
-    // Popup
-
     userMarker.bindPopup(
-        "<strong>You are here</strong><br>" +
-        "Noakhali Bike"
+        "<strong>Your pickup location</strong>"
     );
-
-
-    // Open popup
-
-    userMarker.openPopup();
 }
 
 
 // ==========================================
-// LOCATION DETECTION
+// DETECT USER LOCATION
 // ==========================================
 
 function detectLocation() {
 
-    // Browser support check
-
-    if (
-        !navigator.geolocation
-    ) {
+    if (!navigator.geolocation) {
 
         pickupLocation.textContent =
             "Location not supported";
@@ -148,20 +113,12 @@ function detectLocation() {
         return;
     }
 
-
-    // Loading state
-
     pickupLocation.textContent =
         "Detecting your location...";
 
-
-    // Ask browser for location
-
     navigator.geolocation.getCurrentPosition(
 
-        // SUCCESS
-
-        function(position) {
+        async function(position) {
 
             const latitude =
                 position.coords.latitude;
@@ -169,48 +126,26 @@ function detectLocation() {
             const longitude =
                 position.coords.longitude;
 
-
-            // Save coordinates
-
-            userLatitude =
-                latitude;
-
-            userLongitude =
-                longitude;
-
-
-            // Show coordinates temporarily
-
-            pickupLocation.textContent =
-                `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
-
-
-            // Update map
-
             updateMapLocation(
                 latitude,
                 longitude
             );
 
+            pickupLocation.textContent =
+                `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
 
-            // Try to get readable location name
-
-            reverseGeocode(
+            await reverseGeocode(
                 latitude,
                 longitude
             );
         },
 
-
-        // ERROR
-
         function(error) {
 
-            console.error(
+            console.log(
                 "Location error:",
                 error
             );
-
 
             if (
                 error.code ===
@@ -243,15 +178,10 @@ function detectLocation() {
             }
         },
 
-
-        // OPTIONS
-
         {
             enableHighAccuracy: true,
-
-            timeout: 15000,
-
-            maximumAge: 0
+            timeout: 20000,
+            maximumAge: 30000
         }
     );
 }
@@ -275,22 +205,17 @@ async function reverseGeocode(
             "&format=json" +
             "&zoom=18";
 
-
         const response =
             await fetch(url);
 
-
         if (!response.ok) {
-
             throw new Error(
                 "Reverse geocoding failed"
             );
         }
 
-
         const data =
             await response.json();
-
 
         if (
             data &&
@@ -304,28 +229,399 @@ async function reverseGeocode(
     } catch (error) {
 
         console.log(
-            "Address lookup unavailable:",
+            "Address lookup failed:",
             error
         );
-
-        // Keep coordinates if address fails
     }
 }
 
 
 // ==========================================
-// FIND RIDE BUTTON
+// SEARCH DESTINATION
+// ==========================================
+
+async function searchDestination(
+    placeName
+) {
+
+    const query =
+        placeName.trim();
+
+    if (!query) {
+        return null;
+    }
+
+    try {
+
+        const url =
+            "https://nominatim.openstreetmap.org/search" +
+            `?q=${encodeURIComponent(query + ", Noakhali, Bangladesh")}` +
+            "&format=json" +
+            "&limit=1";
+
+        const response =
+            await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(
+                "Destination search failed"
+            );
+        }
+
+        const results =
+            await response.json();
+
+        if (
+            !results ||
+            results.length === 0
+        ) {
+
+            return null;
+        }
+
+        return {
+
+            latitude:
+                parseFloat(results[0].lat),
+
+            longitude:
+                parseFloat(results[0].lon),
+
+            name:
+                results[0].display_name
+        };
+
+    } catch (error) {
+
+        console.log(
+            "Destination search error:",
+            error
+        );
+
+        return null;
+    }
+}
+
+
+// ==========================================
+// SHOW DESTINATION ON MAP
+// ==========================================
+
+function showDestinationOnMap(
+    latitude,
+    longitude,
+    name
+) {
+
+    if (!map) return;
+
+    destinationLatitude = latitude;
+    destinationLongitude = longitude;
+
+    if (destinationMarker) {
+
+        map.removeLayer(
+            destinationMarker
+        );
+    }
+
+    destinationMarker =
+        L.marker([
+            latitude,
+            longitude
+        ]).addTo(map);
+
+    destinationMarker.bindPopup(
+        `<strong>${name}</strong>`
+    );
+
+    destinationMarker.openPopup();
+
+
+    // Fit pickup + destination
+
+    if (
+        userLatitude !== null &&
+        userLongitude !== null
+    ) {
+
+        const bounds =
+            L.latLngBounds([
+                [
+                    userLatitude,
+                    userLongitude
+                ],
+                [
+                    latitude,
+                    longitude
+                ]
+            ]);
+
+        map.fitBounds(
+            bounds,
+            {
+                padding: [35, 35]
+            }
+        );
+
+    } else {
+
+        map.setView(
+            [latitude, longitude],
+            15
+        );
+    }
+}
+
+
+// ==========================================
+// DISTANCE CALCULATION
+// ==========================================
+
+function calculateDistance(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+) {
+
+    const earthRadius = 6371;
+
+    const dLat =
+        (lat2 - lat1) *
+        Math.PI / 180;
+
+    const dLon =
+        (lon2 - lon1) *
+        Math.PI / 180;
+
+    const a =
+        Math.sin(dLat / 2) *
+        Math.sin(dLat / 2) +
+
+        Math.cos(
+            lat1 * Math.PI / 180
+        ) *
+
+        Math.cos(
+            lat2 * Math.PI / 180
+        ) *
+
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c =
+        2 *
+        Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1 - a)
+        );
+
+    return earthRadius * c;
+}
+
+
+// ==========================================
+// FARE CALCULATION
+// ==========================================
+
+function calculateBikeFare(
+    distanceKm
+) {
+
+    const baseFare = 35;
+
+    const perKm = 14;
+
+    const fare =
+        baseFare +
+        (distanceKm * perKm);
+
+    return Math.max(
+        40,
+        Math.round(fare)
+    );
+}
+
+
+function calculatePremiumFare(
+    distanceKm
+) {
+
+    const baseFare = 50;
+
+    const perKm = 18;
+
+    const fare =
+        baseFare +
+        (distanceKm * perKm);
+
+    return Math.max(
+        55,
+        Math.round(fare)
+    );
+}
+
+
+// ==========================================
+// SHOW FARE RESULT
+// ==========================================
+
+function showFareResult(
+    distanceKm,
+    bikeFare,
+    premiumFare,
+    destinationName
+) {
+
+    const oldResult =
+        document.getElementById(
+            "fareResult"
+        );
+
+    if (oldResult) {
+        oldResult.remove();
+    }
+
+
+    const result =
+        document.createElement("div");
+
+    result.id =
+        "fareResult";
+
+
+    result.style.cssText = `
+        margin-top: 18px;
+        background: #090909;
+        color: white;
+        border-radius: 18px;
+        padding: 20px;
+    `;
+
+
+    result.innerHTML = `
+
+        <div style="
+            font-size:10px;
+            color:#999;
+            letter-spacing:1px;
+            margin-bottom:7px;
+        ">
+            TRIP ESTIMATE
+        </div>
+
+        <div style="
+            font-size:14px;
+            font-weight:800;
+            margin-bottom:15px;
+        ">
+            ${destinationName}
+        </div>
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:12px;
+        ">
+            <span>
+                Distance
+            </span>
+
+            <strong>
+                ${distanceKm.toFixed(1)} km
+            </strong>
+        </div>
+
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:12px;
+        ">
+            <span>
+                Noakhali Bike
+            </span>
+
+            <strong>
+                ৳${bikeFare}
+            </strong>
+        </div>
+
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:18px;
+        ">
+            <span>
+                Bike Premium
+            </span>
+
+            <strong>
+                ৳${premiumFare}
+            </strong>
+        </div>
+
+
+        <button
+            id="confirmRide"
+            style="
+                width:100%;
+                padding:15px;
+                border:0;
+                border-radius:12px;
+                background:#dfff00;
+                color:#090909;
+                font-weight:900;
+                letter-spacing:1px;
+            "
+        >
+            CONFIRM RIDE
+        </button>
+    `;
+
+
+    const findRideButton =
+        document.getElementById(
+            "findRide"
+        );
+
+    findRideButton.parentNode.insertBefore(
+        result,
+        findRideButton.nextSibling
+    );
+
+
+    const confirmRide =
+        document.getElementById(
+            "confirmRide"
+        );
+
+
+    confirmRide.addEventListener(
+        "click",
+        function() {
+
+            alert(
+                "Ride confirmation screen coming next!"
+            );
+        }
+    );
+}
+
+
+// ==========================================
+// FIND RIDE
 // ==========================================
 
 findRide.addEventListener(
     "click",
-    function() {
+    async function() {
 
         const destinationValue =
             destination.value.trim();
 
-
-        // Destination required
 
         if (!destinationValue) {
 
@@ -338,8 +634,6 @@ findRide.addEventListener(
             return;
         }
 
-
-        // Location required
 
         if (
             userLatitude === null ||
@@ -356,24 +650,80 @@ findRide.addEventListener(
         }
 
 
-        // Temporary ride request
+        findRide.disabled = true;
 
-        alert(
-            "Ride request ready!\n\n" +
+        findRide.textContent =
+            "SEARCHING...";
 
-            "Pickup:\n" +
-            `${userLatitude.toFixed(5)}, ` +
-            `${userLongitude.toFixed(5)}\n\n` +
 
-            "Destination:\n" +
-            destinationValue
+        const destinationData =
+            await searchDestination(
+                destinationValue
+            );
+
+
+        if (!destinationData) {
+
+            alert(
+                "Destination not found. " +
+                "Please try another place name."
+            );
+
+            findRide.disabled = false;
+
+            findRide.textContent =
+                "FIND A RIDE";
+
+            return;
+        }
+
+
+        showDestinationOnMap(
+            destinationData.latitude,
+            destinationData.longitude,
+            destinationData.name
         );
+
+
+        const distance =
+            calculateDistance(
+                userLatitude,
+                userLongitude,
+                destinationData.latitude,
+                destinationData.longitude
+            );
+
+
+        const bikeFare =
+            calculateBikeFare(
+                distance
+            );
+
+
+        const premiumFare =
+            calculatePremiumFare(
+                distance
+            );
+
+
+        showFareResult(
+            distance,
+            bikeFare,
+            premiumFare,
+            destinationData.name
+        );
+
+
+        findRide.disabled = false;
+
+        findRide.textContent =
+            "UPDATE RIDE";
     }
 );
 
 
 // ==========================================
-// DESTINATION ENTER KEY
+// ENTER KEY
 // ==========================================
 
 destination.addEventListener(
