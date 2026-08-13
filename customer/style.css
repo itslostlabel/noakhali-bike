@@ -5,27 +5,54 @@
 }
 
 :root {
-    --black: #0b0b0b;
-    --dark: #141414;
+    --black: #090909;
+    --dark: #111111;
     --white: #ffffff;
-    --muted: #8f8f8f;
-    --border: #242424;
-    --soft: #f5f5f5;
-    --accent: #d9ff00;
+    --muted: #8d8d8d;
+    --border: #e7e7e7;
+    --background: #f4f4f2;
+    --accent: #dfff00;
+    --green: #22a06b;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: var(--soft);
+    background: var(--background);
     color: var(--black);
     min-height: 100vh;
-    padding-bottom: 90px;
+    padding-bottom: 88px;
 }
 
+
+/* =========================
+   MAP
+========================= */
+
+#map {
+    width: 100%;
+    height: 270px;
+    background: #dedede;
+    z-index: 1;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
 .topbar {
+    position: relative;
+    z-index: 5;
+
     background: var(--black);
     color: var(--white);
-    padding: 24px 20px 28px;
+
+    padding: 22px 20px 25px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,7 +60,7 @@ body {
 
 .brand {
     font-size: 22px;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: 2px;
 }
 
@@ -43,158 +70,241 @@ body {
 
 .tagline {
     margin-top: 6px;
-    color: #aaa;
-    font-size: 11px;
-    letter-spacing: 1px;
+
+    color: #999;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 .profile-btn {
-    width: 42px;
-    height: 42px;
+    width: 43px;
+    height: 43px;
+
     border: 1px solid #333;
     border-radius: 50%;
-    background: #1b1b1b;
+
+    background: #181818;
     color: white;
+
     font-size: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+
+/* =========================
+   MAIN
+========================= */
+
 main {
+    position: relative;
+    z-index: 3;
+
     padding: 18px;
 }
 
+
+/* =========================
+   LOCATION CARD
+========================= */
+
 .location-card {
-    background: white;
-    border-radius: 18px;
+    background: var(--white);
+
+    border-radius: 19px;
+
     padding: 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.07);
 }
 
 .location-row {
     display: flex;
     align-items: center;
+
     gap: 14px;
 }
 
 .dot {
     width: 12px;
     height: 12px;
+
     border-radius: 50%;
+
     flex-shrink: 0;
 }
 
 .pickup-dot {
     background: var(--accent);
-    border: 3px solid #111;
+
+    border: 3px solid var(--black);
 }
 
 .destination-dot {
-    background: #111;
+    background: var(--black);
 }
 
 .location-content {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .location-content small {
-    font-size: 9px;
-    font-weight: 700;
     color: var(--muted);
-    letter-spacing: 1px;
-    margin-bottom: 5px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.1px;
+
+    margin-bottom: 6px;
 }
 
 .location-content strong {
     font-size: 14px;
+    line-height: 1.4;
 }
 
 .location-content input {
     width: 100%;
+
     border: none;
     outline: none;
-    font-size: 15px;
-    font-weight: 600;
+
     background: transparent;
+
+    color: var(--black);
+
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .location-content input::placeholder {
     color: #999;
+    font-weight: 600;
 }
 
 .line {
     height: 28px;
-    border-left: 1px dashed #bbb;
+
+    border-left: 1px dashed #bdbdbd;
+
     margin-left: 5px;
     margin-top: 4px;
     margin-bottom: 4px;
 }
 
+
+/* =========================
+   RIDE SECTION
+========================= */
+
 .ride-section {
-    margin-top: 25px;
+    margin-top: 26px;
 }
 
 .section-title {
     display: flex;
+
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
+
     margin-bottom: 12px;
 }
 
 .section-title h2 {
     font-size: 18px;
+    font-weight: 800;
 }
 
 .section-title span {
-    font-size: 10px;
     color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 600;
 }
 
+
+/* =========================
+   RIDE CARD
+========================= */
+
 .ride-card {
-    background: white;
+    background: var(--white);
+
     border: 2px solid transparent;
-    border-radius: 16px;
+
+    border-radius: 17px;
+
     padding: 15px;
+
     display: flex;
     align-items: center;
+
     gap: 13px;
+
     margin-bottom: 10px;
+
+    transition:
+        transform 0.15s ease,
+        border-color 0.15s ease;
 }
 
 .ride-card.selected {
-    border-color: #111;
+    border-color: var(--black);
+}
+
+.ride-card:active {
+    transform: scale(0.985);
 }
 
 .ride-icon {
-    width: 45px;
-    height: 45px;
-    border-radius: 13px;
-    background: #111;
+    width: 47px;
+    height: 47px;
+
+    border-radius: 14px;
+
+    background: var(--black);
+
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 21px;
+    justify-content: center;
+
+    font-size: 22px;
 }
 
 .ride-info {
+    flex: 1;
+
     display: flex;
     flex-direction: column;
-    flex: 1;
 }
 
 .ride-info strong {
     font-size: 14px;
+    font-weight: 800;
 }
 
-.ride-info span,
-.ride-price span {
+.ride-info span {
     color: var(--muted);
+
     font-size: 10px;
+
     margin-top: 4px;
 }
 
 .ride-price {
     text-align: right;
+
     display: flex;
     flex-direction: column;
 }
@@ -203,66 +313,126 @@ main {
     font-size: 14px;
 }
 
+.ride-price span {
+    color: var(--muted);
+
+    font-size: 9px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================
+   FIND RIDE BUTTON
+========================= */
+
 .find-ride {
     width: 100%;
+
     margin-top: 12px;
+
     padding: 18px;
+
     border: none;
     border-radius: 15px;
+
     background: var(--black);
-    color: white;
+    color: var(--white);
+
     font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
+    font-weight: 900;
+
+    letter-spacing: 1.7px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
 }
 
 .find-ride:active {
     transform: scale(0.98);
 }
 
+.find-ride:hover {
+    background: #202020;
+}
+
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
 .quick-section {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
     gap: 8px;
+
     margin-top: 25px;
 }
 
 .quick-item {
-    background: white;
+    background: var(--white);
+
     border-radius: 14px;
+
     padding: 13px 5px;
+
     text-align: center;
 }
 
 .quick-item div {
     font-size: 18px;
+
     margin-bottom: 7px;
 }
 
 .quick-item span {
-    font-size: 9px;
     color: #555;
+
+    font-size: 9px;
 }
+
+
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
 
 .bottom-nav {
     position: fixed;
+
     bottom: 0;
     left: 0;
     right: 0;
+
     height: 72px;
-    background: white;
-    border-top: 1px solid #ddd;
+
+    background: var(--white);
+
+    border-top: 1px solid #dedede;
+
     display: flex;
+
     justify-content: space-around;
     align-items: center;
-    z-index: 10;
+
+    z-index: 100;
 }
 
 .nav-item {
+    min-width: 55px;
+
     display: flex;
     flex-direction: column;
+
     align-items: center;
+
     gap: 5px;
+
     color: #999;
 }
 
@@ -275,19 +445,30 @@ main {
 }
 
 .nav-item.active {
-    color: #111;
-    font-weight: 700;
+    color: var(--black);
+
+    font-weight: 800;
 }
 
+
+/* =========================
+   DESKTOP / TABLET
+========================= */
+
 @media (min-width: 600px) {
+
     body {
         max-width: 480px;
+
         margin: auto;
-        box-shadow: 0 0 40px rgba(0,0,0,0.08);
+
+        box-shadow:
+            0 0 45px rgba(0, 0, 0, 0.08);
     }
 
     .bottom-nav {
         max-width: 480px;
+
         margin: auto;
     }
 }

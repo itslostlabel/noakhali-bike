@@ -2,94 +2,183 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Noakhali Bike</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet Map CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIINfQ3M7N0mV2L6K1vY9p9Y6V9g7G3g8="
+        crossorigin=""
+    >
 </head>
 
 <body>
 
+    <!-- MAP -->
+    <div id="map"></div>
+
+
+    <!-- TOP BAR -->
     <header class="topbar">
+
         <div>
-            <div class="brand">NOAKHALI <span>BIKE</span></div>
-            <div class="tagline">Your city. Your ride.</div>
+            <div class="brand">
+                NOAKHALI <span>BIKE</span>
+            </div>
+
+            <div class="tagline">
+                Your city. Your ride.
+            </div>
         </div>
 
-        <button class="profile-btn">👤</button>
+        <button class="profile-btn">
+            👤
+        </button>
+
     </header>
 
 
     <main>
 
+        <!-- LOCATION CARD -->
         <section class="location-card">
 
+            <!-- PICKUP -->
             <div class="location-row">
+
                 <div class="dot pickup-dot"></div>
 
                 <div class="location-content">
-                    <small>PICKUP LOCATION</small>
+
+                    <small>
+                        PICKUP LOCATION
+                    </small>
+
                     <strong id="pickupLocation">
                         Detecting your location...
                     </strong>
+
                 </div>
+
             </div>
+
 
             <div class="line"></div>
 
+
+            <!-- DESTINATION -->
             <div class="location-row">
+
                 <div class="dot destination-dot"></div>
 
                 <div class="location-content">
-                    <small>WHERE TO?</small>
+
+                    <small>
+                        WHERE TO?
+                    </small>
 
                     <input
                         type="text"
                         id="destination"
                         placeholder="Enter your destination"
+                        autocomplete="off"
                     >
+
                 </div>
+
             </div>
 
         </section>
 
 
+        <!-- RIDE SECTION -->
         <section class="ride-section">
 
             <div class="section-title">
-                <h2>Choose your ride</h2>
-                <span>Available nearby</span>
+
+                <h2>
+                    Choose your ride
+                </h2>
+
+                <span>
+                    Available nearby
+                </span>
+
             </div>
 
 
+            <!-- STANDARD BIKE -->
             <div class="ride-card selected">
 
-                <div class="ride-icon">🏍️</div>
+                <div class="ride-icon">
+                    🏍️
+                </div>
 
                 <div class="ride-info">
-                    <strong>Noakhali Bike</strong>
-                    <span>Fast & affordable</span>
+
+                    <strong>
+                        Noakhali Bike
+                    </strong>
+
+                    <span>
+                        Fast & affordable
+                    </span>
+
                 </div>
 
                 <div class="ride-price">
-                    <strong>৳ --</strong>
-                    <span>Estimated</span>
+
+                    <strong>
+                        ৳ --
+                    </strong>
+
+                    <span>
+                        Estimated
+                    </span>
+
                 </div>
 
             </div>
 
 
+            <!-- PREMIUM BIKE -->
             <div class="ride-card">
 
-                <div class="ride-icon">🏍️</div>
+                <div class="ride-icon">
+                    🏍️
+                </div>
 
                 <div class="ride-info">
-                    <strong>Bike Premium</strong>
-                    <span>Comfort ride</span>
+
+                    <strong>
+                        Bike Premium
+                    </strong>
+
+                    <span>
+                        Comfort ride
+                    </span>
+
                 </div>
 
                 <div class="ride-price">
-                    <strong>৳ --</strong>
-                    <span>Estimated</span>
+
+                    <strong>
+                        ৳ --
+                    </strong>
+
+                    <span>
+                        Estimated
+                    </span>
+
                 </div>
 
             </div>
@@ -97,31 +186,67 @@
         </section>
 
 
-        <button class="find-ride" id="findRide">
+        <!-- FIND RIDE -->
+        <button
+            class="find-ride"
+            id="findRide"
+        >
             FIND A RIDE
         </button>
 
 
+        <!-- QUICK ACTIONS -->
         <section class="quick-section">
 
             <div class="quick-item">
-                <div>📍</div>
-                <span>Saved places</span>
+
+                <div>
+                    📍
+                </div>
+
+                <span>
+                    Saved places
+                </span>
+
             </div>
 
-            <div class="quick-item">
-                <div>🕘</div>
-                <span>Ride history</span>
-            </div>
 
             <div class="quick-item">
-                <div>🛡️</div>
-                <span>Safety</span>
+
+                <div>
+                    🕘
+                </div>
+
+                <span>
+                    Ride history
+                </span>
+
             </div>
 
+
             <div class="quick-item">
-                <div>💬</div>
-                <span>Help</span>
+
+                <div>
+                    🛡️
+                </div>
+
+                <span>
+                    Safety
+                </span>
+
+            </div>
+
+
+            <div class="quick-item">
+
+                <div>
+                    💬
+                </div>
+
+                <span>
+                    Help
+                </span>
+
             </div>
 
         </section>
@@ -129,31 +254,72 @@
     </main>
 
 
+    <!-- BOTTOM NAVIGATION -->
     <nav class="bottom-nav">
 
         <div class="nav-item active">
-            <span>⌂</span>
-            <small>Home</small>
+
+            <span>
+                ⌂
+            </span>
+
+            <small>
+                Home
+            </small>
+
         </div>
 
-        <div class="nav-item">
-            <span>🕘</span>
-            <small>Rides</small>
-        </div>
 
         <div class="nav-item">
-            <span>💳</span>
-            <small>Payments</small>
+
+            <span>
+                🕘
+            </span>
+
+            <small>
+                Rides
+            </small>
+
         </div>
 
+
         <div class="nav-item">
-            <span>👤</span>
-            <small>Profile</small>
+
+            <span>
+                💳
+            </span>
+
+            <small>
+                Payments
+            </small>
+
+        </div>
+
+
+        <div class="nav-item">
+
+            <span>
+                👤
+            </span>
+
+            <small>
+                Profile
+            </small>
+
         </div>
 
     </nav>
 
 
+    <!-- Leaflet Map JavaScript -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+
+
+    <!-- Our App JavaScript -->
     <script src="app.js"></script>
 
 </body>
