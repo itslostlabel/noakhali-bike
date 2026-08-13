@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#090909"
+    >
+
+    <title>Noakhali Bike — Driver</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="driver-header">
+
+    <div class="brand">
+        <div class="brand-mark">NB</div>
+
+        <div class="brand-copy">
+            <strong>Noakhali Bike</strong>
+            <span>DRIVER</span>
+        </div>
+    </div>
+
+    <div class="driver-avatar">D</div>
+
+</header>
+
+
+<main class="driver-main">
+
+    <!-- HOME -->
+
+    <div id="homePage">
+
+        <section class="driver-profile">
+
+            <div>
+                <span class="eyebrow">DRIVER ACCOUNT</span>
+
+                <h1 id="driverName">
+                    Noakhali Rider
+                </h1>
+
+                <p id="driverVehicle">
+                    🏍️ Motorcycle • Noakhali
+                </p>
+            </div>
+
+            <div class="rating">
+                <strong>★ 5.0</strong>
+                <span>Rating</span>
+            </div>
+
+        </section>
+
+
+        <!-- ONLINE -->
+
+        <section class="online-card">
+
+            <div class="online-copy">
+
+                <span class="eyebrow">
+                    DRIVER STATUS
+                </span>
+
+                <strong id="statusText">
+                    You're Offline
+                </strong>
+
+                <span id="statusSubtext">
+                    Go online to receive rides
+                </span>
+
+            </div>
+
+            <button
+                id="onlineToggle"
+                class="status-toggle"
+                type="button"
+            >
+                <span class="toggle-circle"></span>
+            </button>
+
+        </section>
+
+
+        <!-- LOCATION -->
+
+        <section class="location-card">
+
+            <div class="location-icon">
+                ◎
+            </div>
+
+            <div class="location-copy">
+
+                <span class="eyebrow">
+                    CURRENT LOCATION
+                </span>
+
+                <strong id="locationText">
+                    Location not detected
+                </strong>
+
+                <span id="locationStatus">
+                    Waiting for GPS
+                </span>
+
+            </div>
+
+            <button
+                id="locateDriver"
+                type="button"
+                class="locate-button"
+            >
+                LOCATE
+            </button>
+
+        </section>
+
+
+        <!-- STATS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <span>TODAY</span>
+
+                <strong id="todayEarnings">
+                    ৳0
+                </strong>
+
+                <small>
+                    Earnings
+                </small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>RIDES</span>
+
+                <strong id="todayRides">
+                    0
+                </strong>
+
+                <small>
+                    Completed
+                </small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>ONLINE</span>
+
+                <strong id="onlineTime">
+                    0m
+                </strong>
+
+                <small>
+                    Today
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- REQUEST -->
+
+        <section
+            id="requestSection"
+            class="request-section hidden"
+        >
+
+            <div class="request-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        NEW RIDE REQUEST
+                    </span>
+
+                    <h2>
+                        Passenger nearby
+                    </h2>
+
+                </div>
+
+                <div
+                    id="requestTimer"
+                    class="request-timer"
+                >
+                    30
+                </div>
+
+            </div>
+
+
+            <div class="route-card">
+
+                <div class="route-point">
+
+                    <div class="point pickup">
+                        ●
+                    </div>
+
+                    <div>
+
+                        <span>PICKUP</span>
+
+                        <strong id="requestPickup">
+                            Maijdee
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="route-line"></div>
+
+
+                <div class="route-point">
+
+                    <div class="point destination">
+                        ●
+                    </div>
+
+                    <div>
+
+                        <span>DESTINATION</span>
+
+                        <strong id="requestDestination">
+                            Noakhali Sadar
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="request-details">
+
+                <div>
+
+                    <span>DISTANCE</span>
+
+                    <strong id="requestDistance">
+                        9.0 km
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>FARE</span>
+
+                    <strong
+                        id="requestFare"
+                        class="fare"
+                    >
+                        ৳161
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="request-actions">
+
+                <button
+                    id="rejectRide"
+                    class="reject-button"
+                    type="button"
+                >
+                    REJECT
+                </button>
+
+                <button
+                    id="acceptRide"
+                    class="accept-button"
+                    type="button"
+                >
+                    ACCEPT RIDE
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACTIVE RIDE -->
+
+        <section
+            id="activeRide"
+            class="active-ride hidden"
+        >
+
+            <div class="active-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ACTIVE RIDE
+                    </span>
+
+                    <h2 id="activeStatus">
+                        Ride Accepted
+                    </h2>
+
+                </div>
+
+                <div class="active-badge">
+                    LIVE
+                </div>
+
+            </div>
+
+
+            <div class="passenger-card">
+
+                <div class="passenger-avatar">
+                    P
+                </div>
+
+                <div>
+
+                    <strong>
+                        Passenger
+                    </strong>
+
+                    <span>
+                        Customer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="active-route">
+
+                <div>
+
+                    <span>PICKUP</span>
+
+                    <strong id="activePickup">
+                        Maijdee
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>DESTINATION</span>
+
+                    <strong id="activeDestination">
+                        Noakhali Sadar
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="active-fare">
+
+                <span>
+                    RIDE FARE
+                </span>
+
+                <strong id="activeFare">
+                    ৳161
+                </strong>
+
+            </div>
+
+
+            <button
+                id="completeRide"
+                class="complete-button"
+                type="button"
+            >
+                COMPLETE RIDE
+            </button>
+
+        </section>
+
+
+        <!-- WAITING -->
+
+        <section
+            id="waitingSection"
+            class="waiting-section"
+        >
+
+            <div class="waiting-icon">
+                🏍️
+            </div>
+
+            <h2>
+                Ready for your next ride?
+            </h2>
+
+            <p id="waitingText">
+                Go online to start receiving ride requests in Noakhali.
+            </p>
+
+        </section>
+
+    </div>
+
+
+    <!-- EARNINGS PAGE -->
+
+    <div
+        id="earningsPage"
+        class="secondary-page hidden"
+    >
+
+        <div class="page-heading">
+
+            <span class="eyebrow">
+                DRIVER WALLET
+            </span>
+
+            <h1>
+                Earnings
+            </h1>
+
+            <p>
+                Your completed ride earnings.
+            </p>
+
+        </div>
+
+
+        <section class="earnings-hero">
+
+            <span>
+                TODAY'S EARNINGS
+            </span>
+
+            <strong id="earningsTotal">
+                ৳0
+            </strong>
+
+            <small>
+                From completed rides
+            </small>
+
+        </section>
+
+
+        <section class="earnings-summary">
+
+            <div>
+                <span>COMPLETED RIDES</span>
+                <strong id="earningsRides">0</strong>
+            </div>
+
+            <div>
+                <span>AVERAGE FARE</span>
+                <strong id="averageFare">৳0</strong>
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- HISTORY PAGE -->
+
+    <div
+        id="historyPage"
+        class="secondary-page hidden"
+    >
+
+        <div class="page-heading">
+
+            <span class="eyebrow">
+                TRIP RECORD
+            </span>
+
+            <h1>
+                Ride History
+            </h1>
+
+            <p>
+                Your completed rides.
+            </p>
+
+        </div>
+
+
+        <div
+            id="historyList"
+            class="history-list"
+        >
+        </div>
+
+
+        <div
+            id="emptyHistory"
+            class="history-empty"
+        >
+
+            <div>
+                🏍️
+            </div>
+
+            <h2>
+                No completed rides
+            </h2>
+
+            <p>
+                Your completed trips will appear here.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROFILE PAGE -->
+
+    <div
+        id="profilePage"
+        class="secondary-page hidden"
+    >
+
+        <div class="page-heading">
+
+            <span class="eyebrow">
+                DRIVER ACCOUNT
+            </span>
+
+            <h1>
+                Profile
+            </h1>
+
+            <p>
+                Noakhali Bike driver account.
+            </p>
+
+        </div>
+
+
+        <section class="profile-card">
+
+            <div class="profile-avatar">
+                D
+            </div>
+
+            <h2>
+                Noakhali Rider
+            </h2>
+
+            <p>
+                🏍️ Motorcycle • Noakhali
+            </p>
+
+            <div class="profile-rating">
+                ★ 5.0
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="driver-nav">
+
+    <button
+        class="nav-button active"
+        data-page="home"
+        type="button"
+    >
+        <span>⌂</span>
+        <small>Home</small>
+    </button>
+
+
+    <button
+        class="nav-button"
+        data-page="earnings"
+        type="button"
+    >
+        <span>▣</span>
+        <small>Earnings</small>
+    </button>
+
+
+    <button
+        class="nav-button"
+        data-page="history"
+        type="button"
+    >
+        <span>◷</span>
+        <small>History</small>
+    </button>
+
+
+    <button
+        class="nav-button"
+        data-page="profile"
+        type="button"
+    >
+        <span>◉</span>
+        <small>Profile</small>
+    </button>
+
+</nav>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
