@@ -5,12 +5,20 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta
+        name="theme-color"
+        content="#090909"
     >
 
     <title>Noakhali Bike</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
     <link
         rel="stylesheet"
@@ -21,213 +29,306 @@
 
 <body>
 
-    <div id="map"></div>
+    <!-- =====================================
+         APP HEADER
+    ====================================== -->
 
-    <header class="topbar">
+    <header class="app-header">
 
-        <div>
-            <div class="brand">
-                NOAKHALI <span>BIKE</span>
-            </div>
+        <div class="brand">
+            <div class="brand-mark">NB</div>
 
-            <div class="tagline">
-                Your city. Your ride.
+            <div>
+                <strong>Noakhali Bike</strong>
+                <span>Ride locally. Ride better.</span>
             </div>
         </div>
 
-        <button class="profile-btn">
-            👤
+        <button
+            class="location-button"
+            id="locateMe"
+            type="button"
+            aria-label="Locate me"
+        >
+            ◎
         </button>
 
     </header>
 
 
+    <!-- =====================================
+         MAP
+    ====================================== -->
+
     <main>
 
-        <section class="location-card">
+        <section class="map-section">
 
-            <div class="location-row">
+            <div
+                id="map"
+                class="map"
+            ></div>
 
-                <div class="dot pickup-dot"></div>
-
-                <div class="location-content">
-
-                    <small>PICKUP LOCATION</small>
-
-                    <strong id="pickupLocation">
-                        Detecting your location...
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="line"></div>
-
-
-            <div class="location-row">
-
-                <div class="dot destination-dot"></div>
-
-                <div class="location-content">
-
-                    <small>WHERE TO?</small>
-
-                    <input
-                        type="text"
-                        id="destination"
-                        placeholder="Enter your destination"
-                        autocomplete="off"
-                    >
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <section class="ride-section">
-
-            <div class="section-title">
-
-                <h2>Choose your ride</h2>
-
-                <span>
-                    Available nearby
+            <div class="map-status">
+                <span class="status-dot"></span>
+                <span id="mapStatus">
+                    Locating you...
                 </span>
-
-            </div>
-
-
-            <div class="ride-card selected">
-
-                <div class="ride-icon">
-                    🏍️
-                </div>
-
-                <div class="ride-info">
-
-                    <strong>
-                        Noakhali Bike
-                    </strong>
-
-                    <span>
-                        Fast & affordable
-                    </span>
-
-                </div>
-
-                <div class="ride-price">
-
-                    <strong>
-                        ৳ --
-                    </strong>
-
-                    <span>
-                        Estimated
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="ride-card">
-
-                <div class="ride-icon">
-                    🏍️
-                </div>
-
-                <div class="ride-info">
-
-                    <strong>
-                        Bike Premium
-                    </strong>
-
-                    <span>
-                        Comfort ride
-                    </span>
-
-                </div>
-
-                <div class="ride-price">
-
-                    <strong>
-                        ৳ --
-                    </strong>
-
-                    <span>
-                        Estimated
-                    </span>
-
-                </div>
-
             </div>
 
         </section>
 
 
-        <button
-            class="find-ride"
-            id="findRide"
-        >
-            FIND A RIDE
-        </button>
+        <!-- =================================
+             BOOKING PANEL
+        ================================== -->
+
+        <section class="booking-panel">
+
+            <div class="booking-handle"></div>
 
 
-        <section class="quick-section">
+            <div class="booking-heading">
 
-            <div class="quick-item">
-                <div>📍</div>
-                <span>Saved places</span>
+                <div>
+                    <span class="eyebrow">
+                        BOOK A RIDE
+                    </span>
+
+                    <h1>
+                        Where are you going?
+                    </h1>
+                </div>
+
+                <div class="live-badge">
+                    LIVE
+                </div>
+
             </div>
 
-            <div class="quick-item">
-                <div>🕘</div>
-                <span>Ride history</span>
+
+            <!-- PICKUP -->
+
+            <div class="route-box">
+
+                <div class="route-line">
+
+                    <div class="route-dot pickup-dot"></div>
+
+                    <div class="route-copy">
+
+                        <span>
+                            PICKUP
+                        </span>
+
+                        <strong id="pickupLocation">
+                            Detecting your location...
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="route-connector"></div>
+
+
+                <!-- DESTINATION -->
+
+                <div class="route-line">
+
+                    <div class="route-dot destination-dot"></div>
+
+                    <div class="route-copy">
+
+                        <span>
+                            DESTINATION
+                        </span>
+
+                        <input
+                            id="destination"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="Where to?"
+                        >
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="quick-item">
-                <div>🛡️</div>
-                <span>Safety</span>
-            </div>
 
-            <div class="quick-item">
-                <div>💬</div>
-                <span>Help</span>
-            </div>
+            <!-- FIND RIDE -->
+
+            <button
+                id="findRide"
+                class="primary-button"
+                type="button"
+            >
+                <span>FIND A RIDE</span>
+                <span>→</span>
+            </button>
+
+
+            <!-- =================================
+                 RIDE OPTIONS
+            ================================== -->
+
+            <section class="ride-section">
+
+                <div class="section-title">
+
+                    <div>
+                        <span class="eyebrow">
+                            RIDE OPTIONS
+                        </span>
+
+                        <h2>
+                            Choose your ride
+                        </h2>
+                    </div>
+
+                    <span>
+                        Available nearby
+                    </span>
+
+                </div>
+
+
+                <!-- NOAKHALI BIKE -->
+
+                <button
+                    class="ride-card selected"
+                    id="bikeRideCard"
+                    type="button"
+                >
+
+                    <div class="ride-icon">
+                        🏍️
+                    </div>
+
+                    <div class="ride-info">
+
+                        <strong>
+                            Noakhali Bike
+                        </strong>
+
+                        <span>
+                            Fast & affordable
+                        </span>
+
+                    </div>
+
+                    <div class="ride-price">
+
+                        <strong id="bikeFareDisplay">
+                            ৳ --
+                        </strong>
+
+                        <span>
+                            Estimated
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <!-- PREMIUM -->
+
+                <button
+                    class="ride-card"
+                    id="premiumRideCard"
+                    type="button"
+                >
+
+                    <div class="ride-icon premium-icon">
+                        🏍️
+                    </div>
+
+                    <div class="ride-info">
+
+                        <strong>
+                            Bike Premium
+                        </strong>
+
+                        <span>
+                            Comfort ride
+                        </span>
+
+                    </div>
+
+                    <div class="ride-price">
+
+                        <strong id="premiumFareDisplay">
+                            ৳ --
+                        </strong>
+
+                        <span>
+                            Estimated
+                        </span>
+
+                    </div>
+
+                </button>
+
+            </section>
+
+
+            <!-- =================================
+                 TRIP ESTIMATE
+            ================================== -->
+
+            <div id="fareResult"></div>
+
+
+            <!-- =================================
+                 BOTTOM NAV
+            ================================== -->
+
+            <nav class="bottom-nav">
+
+                <button
+                    class="nav-item active"
+                    type="button"
+                >
+                    <span>⌂</span>
+                    <small>Home</small>
+                </button>
+
+                <button
+                    class="nav-item"
+                    type="button"
+                >
+                    <span>◷</span>
+                    <small>Rides</small>
+                </button>
+
+                <button
+                    class="nav-item"
+                    type="button"
+                >
+                    <span>▣</span>
+                    <small>Payments</small>
+                </button>
+
+                <button
+                    class="nav-item"
+                    type="button"
+                >
+                    <span>◉</span>
+                    <small>Profile</small>
+                </button>
+
+            </nav>
 
         </section>
 
     </main>
 
 
-    <nav class="bottom-nav">
-
-        <div class="nav-item active">
-            <span>⌂</span>
-            <small>Home</small>
-        </div>
-
-        <div class="nav-item">
-            <span>🕘</span>
-            <small>Rides</small>
-        </div>
-
-        <div class="nav-item">
-            <span>💳</span>
-            <small>Payments</small>
-        </div>
-
-        <div class="nav-item">
-            <span>👤</span>
-            <small>Profile</small>
-        </div>
-
-    </nav>
-
+    <!-- LEAFLET -->
 
     <script
         src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
